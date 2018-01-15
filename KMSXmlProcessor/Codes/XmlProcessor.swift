@@ -42,16 +42,6 @@ public class XmlElement : NSObject, NSCopying {
 		self.init(name: "", attributes: [:], children: [], innerText: "")
 	}
 	
-	@objc(initWithName:)
-	public convenience init(name: String) {
-		self.init(name: name, attributes: [:], children: [], innerText: "")
-	}
-	
-	@objc(initWithName:innerText:)
-	public convenience init(name: String, innerText: String) {
-		self.init(name: name, attributes: [:], children: [], innerText: innerText)
-	}
-
 	@objc(initWithXmlElement:)
 	convenience
 	public init(other: XmlElement) {
@@ -227,7 +217,7 @@ extension XmlElement {
 	/// 	- indent: The string used as an indent. Default is "\t".
 	/// 	- lineEnd: The string used as a line end. Default is "\n".
 	/// - returns: A formatted XML snippet representing this element.
-	@objc(stringAsDocumentWithIndent:lineEnd:)
+	@objc(stringifyAsDocumentWithIndent:lineEnd:)
 	public func stringifyAsDocument(indent: String = "\t", lineEnd: String = "\n") -> String {
 		var string = ""
 		
@@ -278,4 +268,23 @@ extension XmlElement {
 // MARK: Objective-C Supporting.
 
 extension XmlElement {
+	@objc(initWithName:)
+	public convenience init(name: String) {
+		self.init(name: name, attributes: [:], children: [], innerText: "")
+	}
+	
+	@objc(initWithName:innerText:)
+	public convenience init(name: String, innerText: String) {
+		self.init(name: name, attributes: [:], children: [], innerText: innerText)
+	}
+	
+	@objc(stringify)
+	public func stringify() -> String {
+		return stringify(indent: "\t", lineEnd: "\n", indentLevel: 0)
+	}
+	
+	@objc(stringifyAsDocument)
+	public func stringifyAsDocument() -> String {
+		return stringifyAsDocument(indent: "\t", lineEnd: "\n")
+	}
 }
