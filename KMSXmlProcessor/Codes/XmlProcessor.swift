@@ -14,15 +14,19 @@ import Foundation
 @objc(KMSXmlElement)
 public class XmlElement : NSObject, NSCopying {
 	/// Tag name of this element.
+	@objc
 	public var name: String
 	
 	/// Attributes of this element.
+	@objc
 	public var attributes: [String : String]
 	
 	/// Child elements in this element.
+	@objc
 	public var children: [XmlElement]
 	
 	/// Inner text of this element.
+	@objc
 	public var innerText: String
 	
 	override
