@@ -230,7 +230,7 @@ extension XmlElement {
 	/// Translates into an minimized XML document.
 	/// - note: Identical as calling:
 	/// ````
-	/// self.stringify(
+	/// stringify(
 	///     indent: "",
 	///     lineEnd: "",
 	///     indentLevel: 0
@@ -238,7 +238,7 @@ extension XmlElement {
 	/// ````
 	@objc(stringifyMinimized)
 	public func stringifyMinimized() -> String {
-		return self.stringify(indent: "", lineEnd: "", indentLevel: 0)
+		return stringify(indent: "", lineEnd: "", indentLevel: 0)
 	}
 	
 	private func encodeValue(_ value: String) -> String {
