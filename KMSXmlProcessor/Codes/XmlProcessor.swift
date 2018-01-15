@@ -25,6 +25,11 @@ public class XmlElement : NSObject, NSCopying {
 	/// Inner text of this element.
 	public var innerText: String
 	
+	override
+	public convenience init() {
+		self.init(name: "")
+	}
+	
 	@objc(initWithName:attributes:children:innerText:)
 	public init(name: String = "", attributes: [String : String] = [:], children: [XmlElement] = [], innerText: String = "") {
 		self.name = name
@@ -54,9 +59,14 @@ public class XmlElement : NSObject, NSCopying {
 		return children.first { $0.name == name }
 	}
 	
-	@objc(attributeWithName:)
+	@objc(attributeForName:)
 	public func attribute(name: String) -> String? {
 		return attributes[name]
+	}
+	
+	@objc(setAttribute:forName:)
+	public func setAttribute(_ attribute: String?, for name: String) {
+		attributes[name] = attribute
 	}
 	
 	public func copy(with zone: NSZone? = nil) -> Any {
