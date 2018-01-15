@@ -29,11 +29,6 @@ public class XmlElement : NSObject, NSCopying {
 	@objc
 	public var innerText: String
 	
-	override
-	public convenience init() {
-		self.init(name: "")
-	}
-	
 	@objc(initWithName:attributes:children:innerText:)
 	public init(name: String = "", attributes: [String : String] = [:], children: [XmlElement] = [], innerText: String = "") {
 		self.name = name
@@ -42,6 +37,21 @@ public class XmlElement : NSObject, NSCopying {
 		self.innerText = innerText
 	}
 	
+	override
+	public convenience init() {
+		self.init(name: "", attributes: [:], children: [], innerText: "")
+	}
+	
+	@objc(initWithName:)
+	public convenience init(name: String) {
+		self.init(name: name, attributes: [:], children: [], innerText: "")
+	}
+	
+	@objc(initWithName:innerText:)
+	public convenience init(name: String, innerText: String) {
+		self.init(name: name, attributes: [:], children: [], innerText: innerText)
+	}
+
 	@objc(initWithXmlElement:)
 	convenience
 	public init(other: XmlElement) {
@@ -61,6 +71,23 @@ public class XmlElement : NSObject, NSCopying {
 	@objc(firstChildWithName:)
 	public func firstChild(name: String) -> XmlElement? {
 		return children.first { $0.name == name }
+	}
+	
+	@objc(addChild:)
+	public func addChild(_ child: XmlElement) {
+		children.append(child)
+	}
+	
+	@objc(removeChild:)
+	@discardableResult
+	public func removeChild(_ child: XmlElement) -> Bool {
+		guard let index = children.index(of: child) else {
+			return false
+		}
+		
+		children.remove(at: index)
+		
+		return true
 	}
 	
 	@objc(attributeForName:)
@@ -246,4 +273,9 @@ extension XmlElement {
 		
 		return encodedText
 	}
+}
+
+// MARK: Objective-C Supporting.
+
+extension XmlElement {
 }
