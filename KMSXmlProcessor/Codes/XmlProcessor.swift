@@ -103,8 +103,7 @@ extension XmlElement {
 	/// 	- data: A piece of data which decodes from an XML document using UTF-8 encoding.
 	/// - throws: Any error that occured during the parsing.
 	@objc(initWithData:errorPointer:)
-	convenience
-	public init(data: Data) throws {
+	public convenience init(data: Data) throws {
 		self.init()
 		
 		// Keep a strong reference for the handler, as the parser would not.
