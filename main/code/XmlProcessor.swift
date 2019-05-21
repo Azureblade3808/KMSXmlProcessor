@@ -71,7 +71,7 @@ public class XmlElement : NSObject, NSCopying {
 	@objc(removeChild:)
 	@discardableResult
 	public func removeChild(_ child: XmlElement) -> Bool {
-		guard let index = children.index(of: child) else {
+		guard let index = children.firstIndex(of: child) else {
 			return false
 		}
 		
